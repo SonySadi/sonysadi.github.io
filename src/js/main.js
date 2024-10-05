@@ -4,11 +4,10 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-const featherUrl = new URL(
-  "../assets/feather_leaf_silver.glb",
-  import.meta.url
-);
-const paperPlaneUrl = new URL("../assets/paper_plane.glb", import.meta.url);
+import featherUrl from "@/assets/feather_leaf_silver.glb";
+import paperPlaneUrl from "@/assets/paper_plane.glb";
+import backgroundTextureUrl from "@/assets/space.jpg";
+import paperPlaneTexture from "@/assets/paper_texture.avif";
 
 const scene = new THREE.Scene();
 
@@ -46,7 +45,7 @@ document.addEventListener("mousemove", (event) => {
 });
 
 const paperPlane = new GLTFLoader();
-paperPlane.load(paperPlaneUrl.href, function (gltf) {
+paperPlane.load(paperPlaneUrl, function (gltf) {
   const model = gltf.scene;
   model.scale.set(50, 50, 50);
   model.rotation.y = 0.5 * Math.PI;
@@ -55,7 +54,8 @@ paperPlane.load(paperPlaneUrl.href, function (gltf) {
 
   // Load the paper texture
   const textureLoader = new THREE.TextureLoader();
-  const paperTexture = textureLoader.load("../assets/paper_texture.avif");
+
+  const paperTexture = textureLoader.load(paperPlaneTexture);
 
   // Create a paper-like material
   const paperMaterial = new THREE.MeshStandardMaterial({
@@ -106,7 +106,7 @@ const feathers = [];
 
 function addFeather() {
   const assetLoader = new GLTFLoader();
-  assetLoader.load(featherUrl.href, function (gltf) {
+  assetLoader.load(featherUrl, function (gltf) {
     const model = gltf.scene;
     const box = new THREE.Box3().setFromObject(model);
     const size = box.getSize(new THREE.Vector3());
@@ -135,10 +135,9 @@ function addFeather() {
 }
 
 // Create fewer feathers for better performance
-Array(50).fill().forEach(addFeather);
-
+Array(100).fill().forEach(addFeather);
 // background
-const backgroundTexture = new THREE.TextureLoader().load("../assets/space.jpg");
+const backgroundTexture = new THREE.TextureLoader().load(backgroundTextureUrl);
 scene.background = backgroundTexture;
 
 function animate() {
