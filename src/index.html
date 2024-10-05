@@ -20,20 +20,29 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
       }
     </style>
     <div class="relative w-full z-10">
       <div id="portfolio" class="text-white">
         <!-- Introduction section -->
         <div class="section p-8">
-          <div class="rounded-lg p-4 flex flex-col justify-center">
-            <h1
-              id="typing-text"
-              class="text-2xl font-extrabold mb-4 p-4 inline"
-            ></h1>
-            <p id="typing-role" class="text-md font-bold mb-4 p-4"></p>
-            <div id="summary" class="font-semibold mb-4 hidden">
+          <div class="rounded-lg p-4 flex flex-col h-screen justify-between">
+            <div class="mt-0">
+              <div
+                class="bg-green-800 bg-opacity-50 rounded-lg p-4 w-full md:w-3/6 border-2 border-green-300"
+              >
+                <div
+                  id="typing-text"
+                  class="text-2xl font-extrabold inline"
+                ></div>
+                <br />
+                <div id="typing-role" class="text-md font-bold inline"></div>
+              </div>
+            </div>
+            <div
+              id="summary"
+              class="text-sm mb-8 bg-green-800 bg-opacity-50 rounded-lg p-4 w-full border-2 border-green-300 opacity-0 transition-opacity duration-1000 ease-in-out"
+            >
               As a Senior Full Stack Developer with over 7 years of experience,
               I excel in building and optimizing web applications across diverse
               tech stacks, including Node.js, React.js, Next.js, and NestJS. My
@@ -52,17 +61,21 @@
         <div class="section p-8">
           <h2 class="text-2xl font-extrabold mb-4">Skills</h2>
           <ul class="list-disc list-inside">
-            <li>JavaScript (Node.js, React.js, Next.js)</li>
+            <li>Node.js</li>
             <li>TypeScript</li>
+            <li>PHP</li>
+            <li>Python</li>
+            <li>Laravel</li>
+            <li>React.js</li>
+            <li>Vue.js</li>
             <li>NestJS</li>
-            <li>PostgreSQL, MongoDB</li>
-            <li>DevOps</li>
-            <!-- Add more skills as needed -->
+            <li>PostgreSQL</li>
+            <li>MongoDB</li>
           </ul>
         </div>
 
         <!-- Experience section -->
-        <div class="section p-8">
+        <!-- <div class="section p-8">
           <h2 class="text-2xl font-extrabold mb-4">Experience</h2>
           <div class="mb-4">
             <h3 class="text-xl font-bold">Senior Full Stack Developer</h3>
@@ -76,14 +89,12 @@
                 Led a team of developers in implementing new features and
                 optimizing existing ones
               </li>
-              <!-- Add more experience details -->
             </ul>
           </div>
-          <!-- Add more job experiences as needed -->
-        </div>
+        </div> -->
 
         <!-- Projects section -->
-        <div class="section p-8">
+        <!-- <div class="section p-8">
           <h2 class="text-2xl font-extrabold mb-4">Projects</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <div class="bg-white rounded-lg shadow-md p-4">
@@ -92,12 +103,11 @@
                 Description of project 1 goes here.
               </p>
             </div>
-            <!-- Add more project cards as needed -->
           </div>
-        </div>
+        </div> -->
 
         <!-- Contact section -->
-        <div class="section p-8">
+        <!-- <div class="section p-8">
           <h2 class="text-2xl font-extrabold mb-4">Contact</h2>
           <form class="max-w-md">
             <div class="mb-4">
@@ -143,10 +153,9 @@
               Send Message
             </button>
           </form>
-        </div>
+        </div> -->
       </div>
     </div>
-    <script type="module" src="./js/main.js"></script>
     <script>
       const phrases = ["Hi", "I Am", "S M K Abedin Sony"];
       const role = "Full Stack Developer";
@@ -196,11 +205,12 @@
           setTimeout(typeRole, 100);
         } else {
           // Show the summary after the role is typed
-          summary.classList.remove("hidden");
+          summary.style.opacity = 1;
         }
       }
 
-      window.onload = typeText;
+      window.onload = setTimeout(typeText, 3000);
     </script>
+    <script type="module" src="./js/main.js"></script>
   </body>
 </html>

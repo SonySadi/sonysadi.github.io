@@ -1,7 +1,6 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
-import paperPlaneUrl from "@/assets/paper_plane.glb";
-import paperPlaneTexture from "@/assets/paper_texture.avif";
+import paperPlaneUrl from "@/assets/sentinel.glb";
 
 let paperPlaneModel;
 
@@ -11,10 +10,10 @@ const hoverFrequency = 0.05;
 let hoverAngle = 0;
 
 // Plane rotation parameters
-const maxRotation = 0.4; // Maximum rotation in radians
+const maxRotation = 0.5; // Maximum rotation in radians
 
 let targetRotationX = 0;
-let targetRotationY = 0.5 * Math.PI;
+let targetRotationY = 0;
 const lerpFactor = 0.05;
 
 function lerp(start, end, t) {
@@ -26,35 +25,24 @@ function createPlane(scene) {
     const paperPlane = new GLTFLoader();
     paperPlane.load(paperPlaneUrl, function (gltf) {
       const model = gltf.scene;
-      model.scale.set(50, 50, 50);
-      model.rotation.y = 0.5 * Math.PI;
-      model.rotation.z = 0.1 * Math.PI;
-      model.position.set(0, 5, 0); // Move the plane 5 units up
+      model.scale.set(1, 1, 1);
+      model.position.set(0, -5, 0);
+      model.rotation.y = -0.5 * Math.PI;
 
-      // Load the paper texture
-      const textureLoader = new THREE.TextureLoader();
-      const paperTexture = textureLoader.load(paperPlaneTexture);
+      // Create a new Group to act as a container
+      const container = new THREE.Group();
 
-      // Create a paper-like material
-      const paperMaterial = new THREE.MeshStandardMaterial({
-        map: paperTexture,
-        roughness: 0.7,
-        metalness: 0.1,
-        color: 0xffffff,
-        side: THREE.DoubleSide,
-      });
+      // Add the model to the container
+      container.add(model);
 
-      // Apply the material to all meshes in the model
-      model.traverse((node) => {
-        if (node.isMesh) {
-          node.material = paperMaterial;
-          node.castShadow = true;
-          node.receiveShadow = true;
-        }
-      });
+      // Move the model forward within the container
+      model.position.z = 2; // Adjust this value as needed
 
-      scene.add(model);
-      paperPlaneModel = model;
+      // Position the container
+      container.position.set(0, 25, 0);
+
+      scene.add(container);
+      paperPlaneModel = container;
       resolve();
     });
   });
@@ -70,8 +58,8 @@ function animatePaperPlane(mouseX, mouseY) {
     paperPlaneModel.position.x = Math.sin(hoverAngle * 0.5) * 0.3;
 
     // Update target rotations based on mouse position
-    targetRotationX = mouseY * maxRotation * -1;
-    targetRotationY = 0.5 * Math.PI + mouseX * maxRotation;
+    targetRotationX = -mouseY * maxRotation;
+    targetRotationY = mouseX * maxRotation; // Invert mouseX effect
 
     // Smoothly interpolate current rotation to target rotation
     paperPlaneModel.rotation.x = lerp(
@@ -84,9 +72,6 @@ function animatePaperPlane(mouseX, mouseY) {
       targetRotationY,
       lerpFactor
     );
-
-    // Slight tilting motion
-    paperPlaneModel.rotation.z = 0.1 * Math.PI + Math.sin(hoverAngle) * 0.05;
   }
 }
 

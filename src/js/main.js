@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import backgroundTextureUrl from "@/assets/matrix.jpg";
 import { createPlane, animatePaperPlane } from "./plane.js";
-import { createFeathers, animateFeathers } from "./feathers.js";
+import { createFallingLetters, animateFallingLetters } from "./letters.js";
 
 const scene = new THREE.Scene();
 // Setup
@@ -11,7 +11,7 @@ const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
   0.1,
-  1000
+  10000
 );
 camera.position.setZ(30);
 
@@ -28,8 +28,19 @@ controls.enableZoom = true;
 
 // Lights
 const pointLight = new THREE.PointLight(0xffffff, 1000, 100, 2);
-pointLight.position.set(10, 5, 10);
+pointLight.position.set(0, 10, 10);
 scene.add(pointLight);
+
+const pointLight4 = new THREE.PointLight(0x0000ff, 100, 15, 2);
+pointLight4.position.set(0, -5, 10);
+scene.add(pointLight4);
+
+// // helper for point light
+// const helper = new THREE.PointLightHelper(pointLight);
+// scene.add(helper);
+
+// const helper4 = new THREE.PointLightHelper(pointLight4);
+// scene.add(helper4);
 
 const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(ambientLight);
@@ -43,7 +54,7 @@ document.addEventListener("mousemove", (event) => {
 });
 
 // Scene setup
-createFeathers(scene);
+createFallingLetters(scene, 1000);
 const backgroundTexture = new THREE.TextureLoader().load(backgroundTextureUrl);
 scene.background = backgroundTexture;
 
@@ -51,7 +62,7 @@ scene.background = backgroundTexture;
 function animate() {
   requestAnimationFrame(animate);
   controls.update();
-  animateFeathers();
+  animateFallingLetters();
   animatePaperPlane(mouseX, mouseY);
   renderer.render(scene, camera);
 }
