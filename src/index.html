@@ -9,23 +9,208 @@
   </head>
   <body class="bg-gray-100">
     <canvas id="app" class="fixed top-0 left-0 w-full h-full z-0"></canvas>
-
-    <div
-      id="portfolio"
-      class="relative z-10 min-h-screen flex flex-col justify-center text-white"
-    >
-      <!-- first section   -->
-      <div class="p-8 h-screen">
-        <div class="rounded-lg shadow-lg p-4">
-          <h1 class="text-2xl font-bold mb-4">S M K Abedin Sony</h1>
-          <p class="text-gray-300">
-            I'm a Full Stack Developer with a passion for creating beautiful and
-            functional web applications.
-          </p>
+    <style>
+      #portfolio {
+        text-shadow: 2px 2px 4px rgba(1500, 255, 255, 0.7);
+      }
+      body {
+        overflow-y: auto;
+      }
+      .section {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+    <div class="relative w-full z-10">
+      <div id="portfolio" class="text-white">
+        <!-- Introduction section -->
+        <div class="section p-8">
+          <div class="rounded-lg p-4 flex flex-col h-screen justify-between">
+            <div class="mt-0">
+              <div
+                class="bg-green-800 bg-opacity-50 rounded-lg p-4 w-full md:w-3/6 border-2 border-green-300"
+              >
+                <div
+                  id="typing-text"
+                  class="text-2xl font-extrabold inline"
+                ></div>
+                <br />
+                <div id="typing-role" class="text-md font-bold inline"></div>
+              </div>
+            </div>
+            <div
+              id="summary"
+              class="text-sm mb-8 bg-green-800 bg-opacity-50 rounded-lg p-4 w-full border-2 border-green-300 opacity-0 transition-opacity duration-1000 ease-in-out"
+            >
+              As a Senior Full Stack Developer with over 7 years of experience,
+              I excel in building and optimizing web applications across diverse
+              tech stacks, including Node.js, React.js, Next.js, and NestJS. My
+              expertise extends to both front-end and back-end development, with
+              a strong command of databases like PostgreSQL and MongoDB.
+              Currently, I am expanding my skills in DevOps, with a passion for
+              guiding technical teams to deliver innovative, scalable software
+              solutions that drive business growth. Committed to continuous
+              learning, I strive to enhance both my team's and my own technical
+              capabilities in a rapidly evolving landscape.
+            </div>
+          </div>
         </div>
+
+        <!-- Skills section -->
+        <div class="section p-8">
+          <h2 class="text-2xl font-extrabold mb-4">Skills</h2>
+          <ul class="list-disc list-inside">
+            <li>Node.js</li>
+            <li>TypeScript</li>
+            <li>PHP</li>
+            <li>Python</li>
+            <li>Laravel</li>
+            <li>React.js</li>
+            <li>Vue.js</li>
+            <li>NestJS</li>
+            <li>PostgreSQL</li>
+            <li>MongoDB</li>
+          </ul>
+        </div>
+
+        <!-- Experience section -->
+        <!-- <div class="section p-8">
+          <h2 class="text-2xl font-extrabold mb-4">Experience</h2>
+          <div class="mb-4">
+            <h3 class="text-xl font-bold">Senior Full Stack Developer</h3>
+            <p class="text-md">Company Name | 2018 - Present</p>
+            <ul class="list-disc list-inside mt-2">
+              <li>
+                Developed and maintained web applications using Node.js and
+                React.js
+              </li>
+              <li>
+                Led a team of developers in implementing new features and
+                optimizing existing ones
+              </li>
+            </ul>
+          </div>
+        </div> -->
+
+        <!-- Projects section -->
+        <!-- <div class="section p-8">
+          <h2 class="text-2xl font-extrabold mb-4">Projects</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div class="bg-white rounded-lg shadow-md p-4">
+              <h3 class="text-lg font-semibold mb-2">Project 1</h3>
+              <p class="text-sm text-gray-600">
+                Description of project 1 goes here.
+              </p>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- Contact section -->
+        <!-- <div class="section p-8">
+          <h2 class="text-2xl font-extrabold mb-4">Contact</h2>
+          <form class="max-w-md">
+            <div class="mb-4">
+              <label for="name" class="block text-sm font-bold mb-2"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="email" class="block text-sm font-bold mb-2"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="message" class="block text-sm font-bold mb-2"
+                >Message</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:shadow-outline"
+            >
+              Send Message
+            </button>
+          </form>
+        </div> -->
       </div>
     </div>
+    <script>
+      const phrases = ["Hi", "I Am", "S M K Abedin Sony"];
+      const role = "Full Stack Developer";
+      const typingText = document.getElementById("typing-text");
+      const typingRole = document.getElementById("typing-role");
+      const summary = document.getElementById("summary");
+      let phraseIndex = 0;
+      let charIndex = 0;
 
+      function typeText() {
+        if (phraseIndex < phrases.length) {
+          if (charIndex < phrases[phraseIndex].length) {
+            typingText.textContent += phrases[phraseIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(typeText, 100);
+          } else {
+            if (phraseIndex < phrases.length - 1) {
+              setTimeout(eraseText, 1000);
+            } else {
+              charIndex = 0;
+              setTimeout(typeRole, 1000);
+            }
+          }
+        }
+      }
+
+      function eraseText() {
+        if (charIndex > 0) {
+          typingText.textContent = phrases[phraseIndex].substring(
+            0,
+            charIndex - 1
+          );
+          charIndex--;
+          setTimeout(eraseText, 50);
+        } else {
+          phraseIndex++;
+          if (phraseIndex < phrases.length) {
+            setTimeout(typeText, 500);
+          }
+        }
+      }
+
+      function typeRole() {
+        if (charIndex < role.length) {
+          typingRole.textContent += role.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeRole, 100);
+        } else {
+          // Show the summary after the role is typed
+          summary.style.opacity = 1;
+        }
+      }
+
+      window.onload = setTimeout(typeText, 3000);
+    </script>
     <script type="module" src="./js/main.js"></script>
   </body>
 </html>
