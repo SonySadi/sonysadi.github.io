@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sony Sadi - The Great Developer</title>
-</head>
+    <link href="./css/style.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-100">
+    <canvas id="app" class="fixed top-0 left-0 w-full h-full z-0"></canvas>
 
-<body>
-    <p>Are you looking for Hire me?</p>
-</body>
+    <div
+      id="portfolio"
+      class="relative z-10 min-h-screen flex flex-col justify-center text-white"
+    >
+      <!-- first section   -->
+      <div class="p-8 h-screen">
+        <div class="rounded-lg shadow-lg p-4">
+          <h1 class="text-2xl font-bold mb-4">S M K Abedin Sony</h1>
+          <p class="text-gray-300">
+            I'm a Full Stack Developer with a passion for creating beautiful and
+            functional web applications.
+          </p>
+        </div>
+      </div>
 
+      <!-- second section -->
+      <div class="p-8 h-screen">
+        <h1 class="text-2xl font-bold mb-4">About Me</h1>
+        <p class="text-gray-300">
+          I'm a software developer with a passion for creating beautiful and
+          functional web applications.
+        </p>
+      </div>
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
 </html>

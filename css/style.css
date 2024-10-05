@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+canvas {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Custom styles to complement Tailwind CSS */
+
+body {
+  font-family: "Arial", sans-serif;
+}
+
+/* #portfolio {
+  background-color: rgba(0, 0, 0, 0.7);
+} */
+
+.bg-gray-800 {
+  background-color: rgba(31, 41, 55, 0.8);
+}
+
+/* Add any additional custom styles here */
